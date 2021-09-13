@@ -95,10 +95,11 @@ namespace LiteCsvParser.Handlers
         private void MapLineToType<T>(string[] split, List<T> elements, int index) where T : new()
         {
             var e = new T();
-            var innerIndex = 0;
+            var innerIndex = -1;
 
             foreach (var item in split)
             {
+                innerIndex++;
                 if (!Columns.ContainsKey(innerIndex))
                     continue;
 
@@ -107,7 +108,6 @@ namespace LiteCsvParser.Handlers
                     MapItem<T>(item, innerIndex, e);
                 }
 
-                innerIndex++;
                 CurrentColumnIndex = innerIndex;
             }
 
